@@ -21,6 +21,8 @@ JARVIS_AI/
 ├── JARVIS_AI.py                 # FastAPI-сервер и API
 ├── .env                         # секреты; не публиковать
 ├── requirements.txt             # основные библиотеки
+├── requirements-vision.txt      # камера, YOLO и PyTorch
+├── START_JARVIS.bat             # запуск на Windows
 ├── static/                      # HTML, CSS, JavaScript и фон
 └── android/                     # Android Studio / Gradle проект
 ```
@@ -40,7 +42,7 @@ Python 3.11–3.13 — наиболее совместимый вариант. �
 Проверка:
 
 ```powershell
-py --version
+python --version
 ```
 
 Если команда не найдена, установите 64-битный Python и включите `Add Python to PATH`.
@@ -58,17 +60,24 @@ py --version
 
 Выполняйте команды из папки, где лежит `JARVIS_AI.py`.
 
-Установите все зависимости одной командой:
+Создайте локальное окружение:
 
 ```powershell
-pip install -r requirements.txt
+python -m venv .venv
 ```
 
+Активировать его необязательно. Безопаснее явно вызывать его Python:
 
 ```powershell
-pip install -r requirements-vision.txt
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
-Виртуальное окружение создавать не нужно. `requirements.txt` включает основные библиотеки, камеру, YOLO и PyTorch.
+
+Для камеры и распознавания объектов:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-vision.txt
+```
 
 Основные библиотеки:
 
@@ -85,8 +94,8 @@ PyTorch имеет большой размер, поэтому установк�
 Проверка:
 
 ```powershell
-py -c "import fastapi,uvicorn,httpx,dotenv; print('Core: OK')"
-py -c "import cv2,torch; from ultralytics import YOLO; print('Vision: OK')"
+.\.venv\Scripts\python.exe -c "import fastapi,uvicorn,httpx,dotenv; print('Core: OK')"
+.\.venv\Scripts\python.exe -c "import cv2,torch; from ultralytics import YOLO; print('Vision: OK')"
 ```
 
 ## 3. Настройка `.env`
@@ -115,10 +124,12 @@ JARVIS_PORT=9014
 
 ## 4. Запуск сервера
 
-Откройте PowerShell в папке `chatAi` и выполните:
+Простой вариант — дважды нажать `START_JARVIS.bat`. Окно нужно оставить открытым.
+
+Из PowerShell:
 
 ```powershell
-py JARVIS_AI.py
+.\.venv\Scripts\python.exe JARVIS_AI.py
 ```
 
 Откройте:
@@ -216,7 +227,7 @@ adb install -r android\app\build\outputs\apk\debug\app-debug.apk
 ## 10. Проверки проекта
 
 ```powershell
-py -m py_compile JARVIS_AI.py
+.\.venv\Scripts\python.exe -m py_compile JARVIS_AI.py
 node --check static\app.js
 node --check static\voice-fixes.js
 cd android
@@ -226,16 +237,16 @@ cd android
 Перед передачей проекта:
 
 - удалите `.env` из архива;
-- не передавайте `.gradle` и каталоги `build`, если они не нужны;
+- не передавайте `.venv`, `.gradle` и каталоги `build`, если они не нужны;
 - проверьте исходники на API key и пароли;
 - приложите `.env.example`;
-- оставьте `README.md` и `requirements.txt`.
+- оставьте `README.md` и оба requirements-файла.
 
 ## 11. Частые проблемы
 
 ### Чёрный экран или нет подключения в APK
 
-- запустите сервер командой `py JARVIS_AI.py`;
+- запустите `START_JARVIS.bat`;
 - проверьте общую Wi-Fi сеть;
 - нажмите `СЕРВЕР` и исправьте IP;
 - задайте `JARVIS_HOST=0.0.0.0`;
@@ -244,8 +255,10 @@ cd android
 ### `ModuleNotFoundError`
 
 ```powershell
-pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
+
+Для камеры дополнительно установите `requirements-vision.txt`.
 
 ### Порт 9014 занят
 
@@ -270,7 +283,7 @@ Get-NetTCPConnection -LocalPort 9014
 ### Камера не работает
 
 - закройте другие программы с камерой;
-- выполните `pip install -r requirements.txt`;
+- установите `requirements-vision.txt`;
 - разрешите камеру в Windows;
 - первая загрузка модели YOLO может требовать интернет.
 
@@ -284,7 +297,7 @@ Get-NetTCPConnection -LocalPort 9014
 
 1. Прочитать README и структуру проекта.
 2. Не выводить секреты из `.env`.
-3. Выполнить `pip install -r requirements.txt`.
+3. Создать `.venv` и установить requirements.
 4. Проверить Python и JavaScript.
 5. Запустить сервер и проверить HTTP 200 с Basic Auth.
 6. Никогда не встраивать `.env` или Groq key в APK.
