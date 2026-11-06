@@ -64,6 +64,10 @@ py --version
 pip install -r requirements.txt
 ```
 
+
+```powershell
+pip install -r requirements-vision.txt
+```
 Виртуальное окружение создавать не нужно. `requirements.txt` включает основные библиотеки, камеру, YOLO и PyTorch.
 
 Основные библиотеки:
