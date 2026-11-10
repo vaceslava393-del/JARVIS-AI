@@ -833,6 +833,46 @@ textarea{width:100%;min-height:104px;resize:vertical;background:white;color:var(
   .voice-controls #micToggle[hidden],.voice-controls #micStop[hidden]{display:none}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+@media(max-width:720px){body{background:linear-gradient(#fff,#eafff5);color:#25193e}.wrap{padding:12px 18px 30px;min-height:100dvh}.mobile-header{color:#281b42;font-size:27px}.section-title,.help,.quick-actions{display:none}.panel{display:flex;flex-direction:column;align-items:center}.voice-stage{display:flex;flex-direction:column;align-items:center;width:100%;padding-top:5vh}.rings{position:relative;width:min(70vw,290px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#42e5a1,#b8f7d7 55%,#e7fff1 72%,transparent 73%)}.rings:before,.rings:after{content:'';position:absolute;inset:8%;border:4px solid #77eeb2;border-radius:50%}.rings:after{inset:20%}.voice-stage.active .rings:before{animation:pulse 1.8s infinite}.voice-stage.active .rings:after{animation:pulse 1.8s .6s infinite}@keyframes pulse{to{transform:scale(1.5);opacity:0}}.face{width:45%;z-index:1;filter:drop-shadow(0 5px 8px #00834b88)}.stage-title{font-size:clamp(24px,7vw,32px);font-weight:850;text-align:center;margin:16px 0;color:#241638}.waveform{display:flex;align-items:center;justify-content:center;gap:5px;height:55px}.waveform i{height:12px;width:5px;border-radius:6px;background:#13b861}.voice-stage.active .waveform i{animation:wave .7s ease-in-out infinite alternate;animation-delay:calc(var(--n)*-70ms)}@keyframes wave{to{height:44px}}.stage-hint{max-width:400px;width:100%;padding:17px;margin:15px 0;background:#e8e9f9;border-radius:18px;font-size:18px;text-align:center;line-height:1.4}.messages{width:100%;height:auto;min-height:0;max-height:24vh;margin:8px 0}.input-dock{position:static;display:flex;flex-direction:column;align-items:center;order:3;width:100%;margin:8px 0;padding:0;border:0;background:none;box-shadow:none}.mobile-input-title{display:none}.composer{width:100%;max-width:400px;order:2;margin-top:12px}.voice-box{position:static;transform:none;width:100%;height:auto;order:1}.voice-controls{flex:1;width:100%;height:auto}#micToggle,#micStop{width:160px;height:160px;min-height:160px;border:6px solid white;border-radius:50%;display:flex;flex-direction:column;gap:5px;font-size:18px;line-height:1.1}#micToggle{background:linear-gradient(#38d991,#089d5d)}#micStop{background:linear-gradient(#ff5148,#e9231d)}#micToggle:after{content:'Начать говорить';font-weight:800}#micStop:after{content:'Завершить разговор';font-weight:800}.voice-controls #micToggle[hidden],.voice-controls #micStop[hidden]{display:none}}
+@media(prefers-reduced-motion:reduce){.voice-stage.active .rings:before,.voice-stage.active .rings:after,.voice-stage.active .waveform i{animation:none}}
+
+/* The original desktop layout remains unchanged. */
+@media(min-width:721px){.voice-stage{display:none!important}}
+/* Voice-only mobile interface */
+@media(max-width:720px){
+  .composer,.mobile-input-title{display:none!important}
+  .messages{display:none!important}
+  .stage-hint{display:block!important}
+  .input-dock{margin-top:18px}
+  .voice-stage{padding-top:3vh}
+  .voice-stage .face{width:62%;max-width:205px;filter:drop-shadow(0 8px 10px #087f5a55)}
+  .voice-stage .rings{isolation:isolate}
+  .voice-stage .rings:before,.voice-stage .rings:after{animation:none!important;opacity:.45}
+  .voice-stage.speaking .rings:before{animation:pulse 1.5s ease-out infinite!important}
+  .voice-stage.speaking .rings:after{animation:pulse 1.5s ease-out .55s infinite!important}
+  .voice-stage .waveform i{height:5px;transition:height .12s ease}
+  .voice-stage.recording .waveform i{animation:wave .6s ease-in-out infinite alternate;animation-delay:calc(var(--n)*-63ms)}
+  .voice-stage.speaking .waveform i{animation:none}
+  .stage-hint{font-size:19px}
+}
+@media(prefers-reduced-motion:reduce){.voice-stage.speaking .rings:before,.voice-stage.speaking .rings:after,.voice-stage.recording .waveform i{animation:none!important}}
+/* Mobile viewport fit only; desktop and application logic unchanged. */
+@media(max-width:720px){
+  html,body{height:100%;overflow:hidden}
+  body{height:100dvh;min-height:0;padding:0}
+  .wrap{height:100dvh;min-height:0;overflow:hidden;display:flex;flex-direction:column;padding:clamp(6px,1.5dvh,12px) 18px max(8px,env(safe-area-inset-bottom))}
+  .mobile-header{flex:0 0 auto;margin:0 0 clamp(2px,1dvh,10px)}
+  .panel{flex:1;min-height:0;justify-content:space-evenly;overflow:hidden}
+  .voice-stage{flex:0 1 auto;min-height:0;padding-top:0;justify-content:center}
+  .voice-stage .rings{width:min(70vw,290px,29dvh);flex-shrink:1}
+  .stage-title{font-size:clamp(19px,4.5dvh,32px);margin:clamp(3px,1dvh,12px) 0}
+  .waveform{height:clamp(20px,5dvh,55px);flex-shrink:0}
+  .stage-hint{font-size:clamp(14px,2.25dvh,19px);padding:clamp(8px,1.5dvh,17px);margin:clamp(4px,1dvh,12px) 0;line-height:1.3}
+  .input-dock{flex:0 0 auto;margin:0;padding:0}
+  .voice-box{margin:0;padding:0}
+  #micToggle,#micStop{width:clamp(88px,19dvh,160px);height:clamp(88px,19dvh,160px);min-height:0;font-size:clamp(12px,2dvh,18px)}
+}
 </style>
 </head>
 <body>
@@ -872,7 +912,7 @@ textarea{width:100%;min-height:104px;resize:vertical;background:white;color:var(
     <button class="image-button" type="button" data-prompt="Я получил подозрительное сообщение. Объясни, как безопасно его проверить и чего нельзя делать."><img src="/static/assets/buttons/message.png" alt="Проверить сообщение"><span class="mobile-action"><svg class="icon" aria-hidden="true"><use href="#i-message"/></svg><span>Проверить сообщение</span></span></button>
     <button class="image-button" type="button" data-prompt="Я уже сообщил код, пароль или данные карты незнакомому человеку. Дай короткие срочные шаги, что делать сейчас."><img src="/static/assets/buttons/disclosed.png" alt="Я уже сообщил данные"><span class="mobile-action"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg><span>Сообщил данные</span></span></button>
   </div>
-  <div class="messages" id="messages" aria-live="polite"></div>
+  <div class="voice-stage" id="voiceStage"><div class="rings"><svg class="face" viewBox="0 0 220 220" role="img" aria-label="Добрый нарисованный внук"><defs><linearGradient id="shirt" x2="1" y2="1"><stop stop-color="#4b9fe8"/><stop offset="1" stop-color="#2166b8"/></linearGradient></defs><ellipse cx="110" cy="202" rx="70" ry="12" fill="#167b5a" opacity=".14"/><path d="M37 207q2-57 73-57t73 57" fill="url(#shirt)"/><path d="M92 146v22q18 19 36 0v-22" fill="#f5b88c"/><ellipse cx="110" cy="94" rx="64" ry="72" fill="#ffd1a8"/><ellipse cx="48" cy="105" rx="10" ry="16" fill="#f5b88c"/><ellipse cx="172" cy="105" rx="10" ry="16" fill="#f5b88c"/><path d="M47 91Q34 34 79 24q16-25 44-11 54-8 59 68l-12 13-9-29q-17 4-28-13-32 28-79 22z" fill="#493029"/><path d="M72 97q11-9 23 0M126 97q11-9 23 0" stroke="#513a35" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="84" cy="103" r="4" fill="#30282b"/><circle cx="137" cy="103" r="4" fill="#30282b"/><path d="M105 105l-5 20q10 7 20 0" fill="none" stroke="#df9878" stroke-width="3" stroke-linecap="round"/><path d="M89 136q21 19 43 0" stroke="#a94e56" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="68" cy="125" r="12" fill="#f3a6a0" opacity=".45"/><circle cx="153" cy="125" r="12" fill="#f3a6a0" opacity=".45"/><path d="M70 168l40 27 40-27" fill="none" stroke="#d4efff" stroke-width="7" stroke-linecap="round"/></svg></div><div class="stage-title" id="stageTitle">Я рядом, чтобы помочь</div><div class="waveform" aria-hidden="true"><i style="--n:0"></i><i style="--n:1"></i><i style="--n:2"></i><i style="--n:3"></i><i style="--n:4"></i><i style="--n:5"></i><i style="--n:6"></i><i style="--n:7"></i><i style="--n:8"></i><i style="--n:9"></i><i style="--n:10"></i><i style="--n:11"></i><i style="--n:12"></i><i style="--n:13"></i><i style="--n:14"></i><i style="--n:15"></i><i style="--n:16"></i><i style="--n:17"></i><i style="--n:18"></i></div><div class="stage-hint" id="stageHint">Расскажите, что случилось. Я внимательно вас выслушаю.</div></div><div class="messages" id="messages" aria-live="polite"></div>
   <div class="input-dock">
     <h3 class="mobile-input-title">Опишите ситуацию</h3>
     <form id="form" class="composer">
@@ -880,7 +920,7 @@ textarea{width:100%;min-height:104px;resize:vertical;background:white;color:var(
       <button id="send" class="image-button send" type="submit"><img src="/static/assets/buttons/send.png" alt="Отправить"><span class="mobile-send"><svg class="icon" aria-hidden="true"><use href="#i-send"/></svg>Отправить</span></button>
     </form>
     <div class="voice-box">
-      <div id="voiceState" aria-live="polite">Чтобы говорить голосом, нажмите зелёную кнопку.</div>
+      <div id="voiceState" aria-live="polite">Голосовой помощник готов.</div>
       <div class="voice-controls">
         <button id="micToggle" class="image-button" type="button" aria-label="Говорить голосом"><img src="/static/assets/buttons/voice.png" alt="Говорить голосом"><svg class="icon mobile-mic-icon" aria-hidden="true"><use href="#i-mic"/></svg></button>
         <button id="micStop" type="button" hidden><svg class="icon" aria-hidden="true"><use href="#i-stop"/></svg> Остановить микрофон</button>
@@ -937,6 +977,7 @@ function say(text){
   if(!speakEnabled||!('speechSynthesis' in window))return;
   // Не даём распознавателю принять голос самого JANYM за новую команду.
   speechPlaying=true;
+  updateVoiceVisual();
   stopRecognition();
   speechSynthesis.cancel();
   const utterance=new SpeechSynthesisUtterance(plainText(text));
@@ -947,6 +988,7 @@ function say(text){
   if(voice){utterance.voice=voice;utterance.lang=voice.lang;}
   const resume=()=>{
     speechPlaying=false;
+    updateVoiceVisual();
     if(microphoneEnabled)startRecognition();
   };
   utterance.onend=resume;
@@ -962,7 +1004,7 @@ async function sendMessage(value){
   $('send').disabled=true;
   try{
     const wait=bubble('Думаю…');
-    if(window.matchMedia('(max-width:720px)').matches){
+    if(window.matchMedia('(min-width:721px)').matches){
       messages.scrollIntoView({behavior:'smooth',block:'start'});
     }
     const response=await fetch('/api/chat',{
@@ -1006,6 +1048,14 @@ const SpeechRecognition =
 
 let microphoneEnabled = false;
 let speechPlaying = false;
+function updateVoiceVisual(){
+ const stage=$('voiceStage');
+ stage.classList.toggle('speaking',speechPlaying);
+ stage.classList.toggle('recording',microphoneEnabled && listening && !speechPlaying);
+ $('stageTitle').textContent=speechPlaying?'Жаным отвечает…':microphoneEnabled?'Я вас слушаю…':'Я рядом, чтобы помочь';
+ $('stageHint').textContent=speechPlaying?'Сейчас я всё объясню.':microphoneEnabled?'Расскажите, что случилось. Я вас слушаю.':'Расскажите, что случилось. Я внимательно вас выслушаю.';
+}
+
 let restartTimer = null;
 
 function setVoiceState(text) {
@@ -1037,6 +1087,7 @@ function enableMicrophone() {
         return;
     }
     microphoneEnabled = true;
+    updateVoiceVisual();
     jarvisActive = true;
     $('micToggle').hidden = true;
     $('micStop').hidden = false;
@@ -1050,6 +1101,7 @@ function enableMicrophone() {
 
 function disableMicrophone() {
     microphoneEnabled = false;
+    updateVoiceVisual();
     jarvisActive = false;
     stopRecognition();
     $('micToggle').hidden = false;
@@ -1067,6 +1119,7 @@ if (SpeechRecognition) {
 
     recognition.onstart = function() {
         listening = true;
+        updateVoiceVisual();
         setVoiceState(jarvisActive
             ? 'JANYM слушает команду…'
             : 'Микрофон включён. Скажи: «Жаным, включись».');
@@ -1084,6 +1137,7 @@ if (SpeechRecognition) {
 
     recognition.onend = function() {
         listening = false;
+        updateVoiceVisual();
         if (microphoneEnabled && !speechPlaying) {
             restartTimer = setTimeout(startRecognition, 350);
         }
@@ -1091,8 +1145,10 @@ if (SpeechRecognition) {
 
     recognition.onerror = function(event) {
         listening = false;
+        updateVoiceVisual();
         if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
             microphoneEnabled = false;
+            updateVoiceVisual();
             jarvisActive = false;
             $('micToggle').hidden = false;
             $('micStop').hidden = true;
