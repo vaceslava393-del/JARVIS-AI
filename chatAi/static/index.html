@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#03101f">
+  <title> AI</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div><div class="brand"></div><div class="subtitle">AI ASSISTANT</div></div>
+      <div id="connection" class="status">● Локальный сервер</div>
+    </header>
+
+    <nav class="tabs" aria-label="Разделы ">
+      <button class="tab active" data-page="chat">💬 Чат</button>
+      <button class="tab" data-page="apps">▦ Приложения</button>
+      <button class="tab" data-page="media">▶ Медиа</button>
+      <button class="tab" data-page="camera">◉ Камера</button>
+    </nav>
+
+    <main>
+      <section class="page active" id="page-chat">
+        <div class="panel chat-panel">
+          <div class="section-head"><div><h1>Чат </h1><p>Введите вопрос или используйте микрофон.</p></div><button id="voiceToggle" class="secondary">🔊 Голос: ВКЛ</button></div>
+          <div id="messages" class="messages" aria-live="polite"><div class="bubble bot">Система готова. Чем могу помочь?</div></div>
+          <form id="chatForm" class="composer"><textarea id="message" maxlength="6000" rows="2" placeholder="Напишите команду или вопрос…" required></textarea><button id="send" type="submit">Отправить</button></form>
+          <div class="voice-row">
+            <button id="mic" type="button">🎙 Слушать</button><button id="testVoice" class="secondary" type="button">▶ Проверить голос</button><button id="stopVoice" class="secondary" type="button">■ Стоп</button>
+            <select id="voiceSelect" aria-label="Голос"></select>
+            <label>Скорость <input id="rate" type="range" min="0.7" max="1.3" step="0.05" value="0.95"></label>
+          </div>
+          <div id="voiceState" class="hint">Голосовой ответ включён.</div>
+        </div>
+      </section>
+
+      <section class="page" id="page-apps">
+        <div class="panel"><h1>Приложения Windows</h1><p class="hint">Поиск установленных программ выполняется на компьютере, где запущен сервер.</p>
+          <div class="toolbar"><input id="appSearch" placeholder="Chrome, Discord, Steam…"><button id="refreshApps" type="button">Обновить список</button></div>
+          <div id="appStatus" class="hint"></div><div id="appResults" class="cards"></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-media">
+        <div class="panel"><h1>Поиск фильмов и видео</h1><p class="hint"> покажет ссылки на найденные источники.</p>
+          <div class="toolbar"><input id="mediaSearch" placeholder="Название фильма или видео…"><select id="mediaKind"><option value="video">Видео</option><option value="movie">Фильм / сериал</option></select><button id="mediaSearchButton" type="button">Найти</button></div>
+          <div id="mediaStatus" class="hint"></div><div id="mediaResults" class="cards"></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-camera">
+        <div class="panel"><h1>Умная камера</h1><p class="hint">Камера и распознавание объектов работают на компьютере с сервером.</p>
+          <div class="toolbar"><button id="cameraStart" type="button">Включить</button><button id="cameraStop" class="secondary" type="button">Остановить</button></div>
+          <img id="camera" class="camera hidden" alt="Поток камеры"><div id="cameraStatus" class="hint">Камера выключена.</div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="/static/app.js" defer></script>
+  <script src="/static/voice-fixes.js" defer></script>
+</body>
+</html>

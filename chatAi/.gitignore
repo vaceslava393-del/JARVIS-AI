@@ -1,0 +1,13 @@
+.env
+.venv/
+.ultralytics/
+__pycache__/
+*.py[cod]
+server.log
+server-error.log
+android/.gradle/
+android/build/
+android/app/build/
+local.properties
+*.jks
+*.keystore
